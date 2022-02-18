@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeleteView">
+
+    <EditText
+        android:id="@+id/txt_dID"
+        android:layout_width="183dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="360dp"
+        android:height="49dp"
+        android:ems="10"
+        android:hint="Ingrese ID Platillo"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_dSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="364dp"
+        android:backgroundTint="#009688"
+        android:onClick="deletePlatillo"
+        android:text="Buscar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="411dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="172dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Eliminar Platillo"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
