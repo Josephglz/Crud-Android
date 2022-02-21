@@ -1,7 +1,6 @@
 package com.example.practica4;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +20,7 @@ import java.util.Scanner;
 public class ReadView extends AppCompatActivity
 {
     TextView txtcont;
-    ArrayList<Platillo> listaPlatillos = new ArrayList<Platillo>();
+    ArrayList<Platillo> listaPlatillos = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,11 +40,10 @@ public class ReadView extends AppCompatActivity
         {
             inputStream = openFileInput(fName);
             Scanner sc = new Scanner(inputStream);
-            String contenido = "";
             while(sc.hasNext())
             {
-                contenido = sc.nextLine() + "\n";
-                String elementos[] = contenido.split(",");
+                datos = sc.nextLine() + "\n";
+                String[] elementos = datos.split(",");
                 listaPlatillos.add(new Platillo(listaPlatillos.size(), elementos[0],
                         Float.parseFloat(elementos[1]),
                         elementos[2],
