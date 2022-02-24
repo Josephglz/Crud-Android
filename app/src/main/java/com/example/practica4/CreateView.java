@@ -7,6 +7,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -14,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 public class CreateView extends AppCompatActivity
 {
     EditText txtname, txtprice, txtcategory, txtdesc, txturl;
+    JSONObject jArray = new JSONObject();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +30,19 @@ public class CreateView extends AppCompatActivity
         txtcategory = findViewById(R.id.txt_cCategory);
         txtdesc = findViewById(R.id.txt_cDescription);
         txturl = findViewById(R.id.txt_cPicture);
+
+        try {
+            JSONObject miPlatillo = new JSONObject(getIntent().getStringExtra("PlatillosJSON"));
+
+            txtname.setText(miPlatillo.getJSONObject("Platillos").getString("Nombre"));
+            txtprice.setText(miPlatillo.getJSONObject("Platillos").getString("Precio"));
+            txtcategory.setText(miPlatillo.getJSONObject("Platillos").getString("Categoria"));
+            txtdesc.setText(miPlatillo.getJSONObject("Platillos").getString("Descripcion"));
+            txturl.setText(miPlatillo.getJSONObject("Platillos").getString("Foto"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clearFields(View v)

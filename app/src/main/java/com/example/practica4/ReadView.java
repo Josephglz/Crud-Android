@@ -4,10 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.FileInputStream;
@@ -19,19 +24,39 @@ import java.util.Scanner;
 
 public class ReadView extends AppCompatActivity
 {
-    TextView txtcont;
+    EditText txtsearch;
+    ListView milista;
     ArrayList<Platillo> listaPlatillos = new ArrayList<>();
+    MyCustomAdapter adaptador;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_view);
-        txtcont = findViewById(R.id.txt_rContent);
+
         loadPlatillos();
+        milista = findViewById(R.id.miLista);
+        MyCustomAdapter adaptador = new MyCustomAdapter(listaPlatillos, this);
+        milista.setAdapter(adaptador);
+
+        txtsearch = findViewById(R.id.txt_rSearch);
+        txtsearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adaptador.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
 
     public void loadPlatillos() {
-
         listaPlatillos.clear();
         String fName = "platillos.txt";
         String datos = "";
@@ -44,22 +69,12 @@ public class ReadView extends AppCompatActivity
             {
                 datos = sc.nextLine() + "\n";
                 String[] elementos = datos.split(",");
-                listaPlatillos.add(new Platillo(listaPlatillos.size(), elementos[0],
+                Platillo nPlatillo = new Platillo(listaPlatillos.size(), elementos[0],
                         Float.parseFloat(elementos[1]),
                         elementos[2],
                         elementos[3],
-                        elementos[4]));
-            }
-            for(Platillo platillo : listaPlatillos)
-            {
-                datos = datos + "<b>ID:</b> " + platillo.getId() +
-                        "<br><b>Platillo:</b> " + platillo.getNombre() +
-                        "<br><b>Precio:</b> $" + platillo.getPrecio() +
-                        "<br><b>Categoria:</b> " + platillo.getCategoria() +
-                        "<br><b>Descripción:</b> " + platillo.getDescripcion() +
-                        "<br><b>URL Foto:</b> " + platillo.getFoto() +
-                        "<br>____________________________________<br>";
-                txtcont.setText(Html.fromHtml(datos));
+                        elementos[4]);
+                listaPlatillos.add(nPlatillo);
             }
         } catch (Exception e)
         {

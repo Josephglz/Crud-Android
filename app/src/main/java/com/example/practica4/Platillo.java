@@ -94,12 +94,11 @@ public class Platillo implements Serializable
     @Override
     public String toString()
     {
-        return "Platillo  " +
-                "id = " + id + '\'' +
-                "nombre ='" + nombre + '\'' +
-                "precio =" + precio +
-                "categoria ='" + categoria + '\'' +
-                "descripcion ='" + descripcion + '\'' +
-                "foto ='" + foto;
+        return "ID: " + id +
+                "\nNombre: " + nombre +
+                "\nPrecio: $" + precio +
+                "\nCategoria: " + categoria +
+                "\nDescripción: " + descripcion +
+                "\nFoto: " + foto;
     }
 }
